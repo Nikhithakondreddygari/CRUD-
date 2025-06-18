@@ -1,28 +1,40 @@
-import React, { useState } from 'react'
-import axios from 'axios'
-import {Link, useNavigate} from 'react-router-dom'
+import React, { useState } from 'react';
+import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Create() {
-    const [values, setValues] = useState({
-        name: '',
-        email: '',
-        age: '',
-        gender: ''
-    })
+  const [values, setValues] = useState({
+    name: '',
+    email: '',
+    age: '',
+    gender: ''
+  });
 
-    const navigate = useNavigate()
+  const [error, setError] = useState(null);
 
-    function handleSubmit(e){
-        e.preventDefault()
+  const navigate = useNavigate();
 
-        axios.post('/add_user', values)
-        .then((res)=>{
-            
-            navigate('/')
-            console.log(res)
-        })
-        .catch((err)=>console.log(err))
-    }
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    // Convert age to number
+    const data = { ...values, age: parseInt(values.age) };
+
+    axios.post('http://localhost:5000/add_user', data)
+      .then((res) => {
+        if (res.data.success) {
+          console.log('Student added:', res.data);
+          navigate('/');
+        } else {
+          setError(res.data.message || 'Failed to add student');
+        }
+      })
+      .catch((err) => {
+        console.error('Error adding student:', err);
+        setError('Failed to add student: ' + err.message);
+      });
+  }
+
   return (
     <div className='container vh-100 vw-100 bg-primary'>
         <div className='row'>
