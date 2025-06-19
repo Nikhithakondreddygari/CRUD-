@@ -16,13 +16,14 @@ function Home() {
     }
     }, [deleted])
 
-    function handleDelete(id){
-        axios.delete(`/delete/${id}`)
-        .then((res)=>{
-            setDeleted(true)
-        })
-        .catch((err)=> console.log(err))
-    }
+function handleDelete(id) {
+  axios.delete(`http://localhost:5000/delete/${id}`)
+    .then((res) => {
+      setDeleted(true);
+    })
+    .catch((err) => console.log(err));
+}
+
   return (
     <div className='container-fluid bg-primary vh-100 vw-100'>
         <h3>Students</h3>

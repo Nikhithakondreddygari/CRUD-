@@ -16,17 +16,17 @@ function Edit() {
 
   const navigate = useNavigate();
 
-  function handleSubmit(e) {
-    e.preventDefault();
+function handleSubmit(e) {
+  e.preventDefault();
 
-    axios
-      .post(`/edit_user/${id}`, data[0])
-      .then((res) => {
-        navigate("/");
-        console.log(res);
-      })
-      .catch((err) => console.log(err));
-  }
+  axios
+    .post(`http://localhost:5000/edit_user/${id}`, data[0])
+    .then((res) => {
+      navigate("/");
+      console.log(res);
+    })
+    .catch((err) => console.log(err));
+}
 
   return (
     <div className="container-fluid vw-100 vh-100 bg-primary">
