@@ -8,7 +8,7 @@ function Home() {
     useEffect(()=>{
         if(deleted){
             setDeleted(false)
-        axios.get('http://localhost:5000/students')
+        axios.get('http://13.232.173.163:5000/students')
         .then((res)=>{
             setData(res.data)
         })
